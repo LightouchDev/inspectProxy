@@ -54,7 +54,7 @@ proxy.on('getRequest', (request) => console.log('request', request))
 // get response body from remote and decode
 proxy.on('getResponse', (response) => {
   const resultHandler = (error, result) => {
-    if (error) console.error('decoder throw error:', error)
+    if (error) console.error('Decompressor throw error:', error)
     console.log(result.toString()) // result is <Buffer>, append .toString() to convert into plain text.
   }
 
