@@ -1,0 +1,99 @@
+# inspectProxy
+
+> a http proxy to inspect request / response
+
+[![Travis Build Status](https://travis-ci.org/LightouchDev/inspectProxy.svg)](https://travis-ci.org/LightouchDev/inspectProxy) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/LightouchDev/inspectProxy/blob/master/LICENSE)
+
+[![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
+
+## Install
+
+```shell
+yarn add https://github.com/LightouchDev/inspectProxy
+```
+
+## Usage
+
+inspectProxy inherits from `http.Server` and has the following additional events:
+
+### Event: 'getRequest'
+
+* `request` \<Object>
+  * `url` \<String> Request url
+  * `body` \<Buffer> Request message body
+  * `header` \<Object> Request header
+
+Emitted each time there is a request. `body` may be an empty \<Buffer>, append `toString()` to inspect content.
+
+### Event: 'getResponse'
+
+* `request` \<Object>
+  * `url` \<String> Origin request url
+  * `body` \<Buffer> Response message body
+  * `header` \<Object> Response header
+
+Emitted each time when a response is received. `body` may be an empty \<Buffer>, append `toString()` to inspect content.
+
+### Event: 'httpService'
+
+* `request` \<http.IncomingMessage>
+* `response` \<http.ServerResponse>
+
+It's emitted in `request` event, and emitted only when request url is not contained hostname.
+
+```javascript
+// this emit event
+console.log(request.url) // return '/some-path'
+
+// this wouldn't
+console.log(request.url) // return 'http://example.com/'
+```
+
+### proxy.port
+
+The port that proxy using for listening.
+
+### proxy.decompressor
+
+The switch to decompress message body from remote response according to `Content-Encoding` header. default: `true`
+
+### proxy.setReqInspectCondition(callback)
+
+* `callback` \<Function>
+  * `clientRequest` \<http.IncomingMessage>
+
+Set which request condition should be inspected, callback return `true` to inspect current request.
+
+### proxy.setResInspectCondition(callback)
+
+* `callback` \<Function>
+  * `clientRequest` \<http.IncomingMessage>
+  * `remoteResponse` \<http.IncomingMessage>
+
+Set which response condition should be inspected, callback return `true` to inspect current response.
+
+### proxy.smartListen([basePort])
+
+* basePort \<Number> The base port to start finding. default: `8000`
+
+Proxy would check port available and start listening. if port unavailable, it would try next port until found.
+
+As `http.listen()`, it would emit `listening` event when proxy start listening.
+
+## Thanks to
+
+* Design referance: [AnyProxy](https://github.com/alibaba/anyproxy)
+
+## Note
+
+* **No https inspect**
+  * All https connection is bypassed.
+* **No websocket inspect**
+  * Websocket support is in plan, but no ETA.
+* **Performace cost**
+  * This proxy add about **5~7ms** latency in each response with about **0.035%** response lost.
+  * (test in [vegeta](https://github.com/tsenart/vegeta) with gzip-enabled nginx default page)
+
+## LICENSE
+
+MIT
