@@ -41,12 +41,12 @@ Emitted each time when a response is received. `body` may be an empty \<Buffer>,
 
 It's emitted in `request` event, and emitted only when request url is not contained hostname.
 
-```javascript
-// this emit event
-console.log(request.url) // return '/some-path'
+```shell
+# this emit event
+$ curl http://PROXY-ADDRESS:PORT/some-path # request.url === '/some-path'
 
-// this wouldn't
-console.log(request.url) // return 'http://example.com/'
+# this wouldn't
+$ curl --proxy http://PROXY-ADDRESS:PORT/ http://example.com/ # request.url === 'http://example.com/'
 ```
 
 ### proxy.port
@@ -60,17 +60,17 @@ The switch to decompress message body from remote response according to `Content
 ### proxy.setReqInspectCondition(callback)
 
 * `callback` \<Function>
-  * `clientRequest` \<http.IncomingMessage>
+  * `clientRequest` \<http.IncomingMessage> Request from client
 
-Set which request condition should be inspected, callback return `true` to inspect current request.
+Set which request condition should be inspected, callback should return `true` to inspect current request.
 
 ### proxy.setResInspectCondition(callback)
 
 * `callback` \<Function>
-  * `clientRequest` \<http.IncomingMessage>
-  * `remoteResponse` \<http.IncomingMessage>
+  * `clientRequest` \<http.IncomingMessage> Request from client
+  * `remoteResponse` \<http.IncomingMessage> Response from remote server
 
-Set which response condition should be inspected, callback return `true` to inspect current response.
+Set which response condition should be inspected, callback should return `true` to inspect current response.
 
 ### proxy.smartListen([basePort])
 
@@ -79,6 +79,10 @@ Set which response condition should be inspected, callback return `true` to insp
 Proxy would check available port and start listening. if port unavailable, it would try next port until found.
 
 As `http.listen()`, it would emit `listening` event when proxy start listening.
+
+### Example
+
+See [example](example.js)
 
 ## Thanks to
 
