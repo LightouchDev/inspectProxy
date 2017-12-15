@@ -76,7 +76,7 @@ Set which response condition should be inspected, callback return `true` to insp
 
 * basePort \<Number> The base port to start finding. default: `8000`
 
-Proxy would check port available and start listening. if port unavailable, it would try next port until found.
+Proxy would check available port and start listening. if port unavailable, it would try next port until found.
 
 As `http.listen()`, it would emit `listening` event when proxy start listening.
 
