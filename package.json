@@ -1,13 +1,13 @@
 {
   "name": "inspectproxy",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "a http proxy to inspect request / response",
   "main": "index.js",
   "author": "Miau Lightouch",
   "license": "MIT",
   "dependencies": {
     "debug": "^3.1.0",
-    "parseUrl": "https://github.com/LightouchDev/parseUrl",
+    "url-parser": "https://github.com/LightouchDev/url-parser",
     "portfinder": "^1.0.13"
   },
   "engines": {
