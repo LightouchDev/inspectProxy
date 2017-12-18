@@ -1,6 +1,6 @@
 {
   "name": "inspectproxy",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "a http proxy to inspect request / response",
   "main": "index.js",
   "author": "Miau Lightouch",
