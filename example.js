@@ -4,7 +4,7 @@ const HttpProxy = require('./lib')
 const zlib = require('zlib')
 
 const proxy = HttpProxy.createServer()
-proxy.decompressor = false // set false to dump raw message body from response only, default: true
+proxy.decompress = false // set false to dump raw message body from response only, default: true
 
 // Inspect response with html and json content only
 proxy.setResInspectCondition((clientRequest, remoteResponse) => {
@@ -54,11 +54,11 @@ proxy.on('getRequest', (request) => console.log('request', request))
 // get response body from remote and decode
 proxy.on('getResponse', (response) => {
   const resultHandler = (error, result) => {
-    if (error) console.error('Decompressor throw error:', error)
+    if (error) console.error('!!! Decompression error:', error)
     console.log(result.toString()) // result is <Buffer>, append .toString() to convert into plain text.
   }
 
-  // proxy.decompressor is false, we must decode ourself.
+  // proxy.decompress is false, we must decode ourself.
   if (response.header['content-encoding'] === 'gzip') {
     zlib.gunzip(response.body, resultHandler)
   } else if (response.header['content-encoding'] === 'deflate') {

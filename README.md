@@ -53,7 +53,7 @@ $ curl --proxy http://PROXY-ADDRESS:PORT/ http://example.com/ # request.url === 
 
 The port that proxy using for listening.
 
-### proxy.decompressor
+### proxy.decompress
 
 The switch to decompress message body from remote response according to `Content-Encoding` header. default: `true`
 
@@ -86,7 +86,7 @@ See [example](example.js)
 
 ## Thanks to
 
-* Design referance: [AnyProxy](https://github.com/alibaba/anyproxy)
+* Design reference: [AnyProxy](https://github.com/alibaba/anyproxy)
 
 ## Note
 
@@ -94,7 +94,7 @@ See [example](example.js)
   * All https connection is bypassed.
 * **No websocket inspect**
   * Websocket support is in plan, but no ETA.
-* **Performace cost**
+* **Performance cost**
   * This proxy add about **5~7ms** latency in each response with about **0.035%** response lost.
   * (test in [vegeta](https://github.com/tsenart/vegeta) with gzip-enabled nginx default page)
 
