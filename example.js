@@ -58,10 +58,10 @@ proxy.on('getResponse', (response) => {
     console.log(result.toString()) // result is <Buffer>, append .toString() to convert into plain text.
   }
 
-  // proxy.decodeMessage is false, we must decode ourself.
-  if (response.header['Content-Encoding'] === 'gzip') {
+  // proxy.decompressor is false, we must decode ourself.
+  if (response.header['content-encoding'] === 'gzip') {
     zlib.gunzip(response.body, resultHandler)
-  } else if (response.header['Content-Encoding'] === 'deflate') {
+  } else if (response.header['content-encoding'] === 'deflate') {
     zlib.inflateRaw(response.body, resultHandler)
   }
 })
