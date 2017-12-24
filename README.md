@@ -1,6 +1,6 @@
 # inspectProxy
 
-> a http proxy to inspect request / response
+> a http proxy to non-blocking inspect request / response
 
 [![Travis Build Status](https://travis-ci.org/LightouchDev/inspectProxy.svg)](https://travis-ci.org/LightouchDev/inspectProxy) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/LightouchDev/inspectProxy/blob/master/LICENSE)
 
@@ -21,7 +21,7 @@ inspectProxy inherits from `http.Server` and has the following additional events
 * `request` \<Object>
   * `url` \<String> Request url
   * `body` \<Buffer> Request message body
-  * `header` \<Object> Request header
+  * `headers` \<Object> Request header
 
 Emitted each time there is a request. `body` may be an empty \<Buffer>, append `toString()` to inspect content.
 
@@ -30,7 +30,7 @@ Emitted each time there is a request. `body` may be an empty \<Buffer>, append `
 * `request` \<Object>
   * `url` \<String> Origin request url
   * `body` \<Buffer> Response message body
-  * `header` \<Object> Response header
+  * `headers` \<Object> Response header
 
 Emitted each time when a response is received. `body` may be an empty \<Buffer>, append `toString()` to inspect content.
 
