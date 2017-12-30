@@ -51,7 +51,7 @@ $ curl --proxy http://PROXY-ADDRESS:PORT/ http://example.com/ # request.url === 
 
 ### proxy.port
 
-The port that proxy using for listening.
+The port that proxy using for listening. only available after `listening` event emitted.
 
 ### proxy.decompress
 

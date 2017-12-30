@@ -65,3 +65,8 @@ proxy.on('getResponse', (response) => {
     zlib.inflateRaw(response.body, resultHandler)
   }
 })
+
+// Access port when start listening
+proxy.once('listening', () => {
+  console.log(`Proxy listen on ${proxy.port}`)
+})
